@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.sist</groupId>
-	<artifactId>sb03_jpa_oracle</artifactId>
+	<artifactId>sb04_oracle_mybatis_jsp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sb01_jsp</name>
+	<name>sb04_oracle_mybatis_jsp</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
