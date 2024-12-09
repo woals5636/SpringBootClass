@@ -1,8 +1,8 @@
-package org.sist.sb06_sbb2.answer;
+package org.sist.sb06_sbb3.answer;
 
 import java.time.LocalDateTime;
 
-import org.sist.sb06_sbb2.question.Question;
+import org.sist.sb06_sbb3.question.Question;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
