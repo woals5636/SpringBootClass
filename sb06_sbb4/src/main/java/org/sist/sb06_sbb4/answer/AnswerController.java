@@ -1,7 +1,7 @@
-package org.sist.sb06_sbb3.answer;
+package org.sist.sb06_sbb4.answer;
 
-import org.sist.sb06_sbb3.question.Question;
-import org.sist.sb06_sbb3.question.QuestionService;
+import org.sist.sb06_sbb4.question.Question;
+import org.sist.sb06_sbb4.question.QuestionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
