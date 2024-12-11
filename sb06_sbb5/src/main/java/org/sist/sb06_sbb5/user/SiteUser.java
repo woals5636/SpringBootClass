@@ -15,15 +15,15 @@ import lombok.Setter;
 public class SiteUser {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-	@Column(unique=true)
+	@Column(unique = true)
 	private String username;
 	
 	private String password;
 	
-	@Column(unique=true)
+	@Column(unique = true)
 	private String email;
 	
 }

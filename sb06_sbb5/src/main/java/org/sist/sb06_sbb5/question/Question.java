@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.sist.sb06_sbb5.answer.Answer;
+import org.sist.sb06_sbb5.user.SiteUser;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,6 +13,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,4 +39,7 @@ public class Question {
 			, cascade = CascadeType.REMOVE // 질문 제거하면 답변도 같이 삭제하도록 함
 			, fetch = FetchType.EAGER)	// 즉시 방식
 	private List<Answer> answerList;
+	
+	@ManyToOne
+	private SiteUser author;
 } // class

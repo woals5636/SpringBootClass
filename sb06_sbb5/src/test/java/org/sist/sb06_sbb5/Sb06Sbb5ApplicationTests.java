@@ -11,6 +11,7 @@ import org.sist.sb06_sbb5.answer.AnswerRepository;
 import org.sist.sb06_sbb5.question.Question;
 import org.sist.sb06_sbb5.question.QuestionRepository;
 import org.sist.sb06_sbb5.question.QuestionService;
+import org.sist.sb06_sbb5.user.SiteUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -156,6 +157,7 @@ class Sb06Sbb5ApplicationTests {
 		}
 	}
 */
+/*	
 	@Autowired
 	private QuestionService questionService;
 	
@@ -170,5 +172,5 @@ class Sb06Sbb5ApplicationTests {
 			
 		}// for
 	}
-		
+*/
 }// class

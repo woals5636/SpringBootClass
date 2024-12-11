@@ -1,9 +1,14 @@
 package org.sist.sb06_sbb5.question;
 
+import java.security.Principal;
+
 import org.sist.sb06_sbb5.answer.AnswerForm;
 import org.sist.sb06_sbb5.page.Criteria;
 import org.sist.sb06_sbb5.page.PageDTO;
+import org.sist.sb06_sbb5.user.SiteUser;
+import org.sist.sb06_sbb5.user.UserService;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 public class QuestionController {
 
 	private final QuestionService questionService;
+	private final UserService userService;
+	
 	/* [1]
 	@GetMapping("/list")
 	public void list(Model model) {
@@ -62,16 +69,20 @@ public class QuestionController {
 	}
 
 	// 질문 등록하기
+	// 인증 X -> 강제로 로그인 페이지로 이동
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/create")
 	public void questionCreate( QuestionForm questionForm ) {
 		log.info("QuestionController questionCreate().... 질문등록");
 	}
 
 	// [2] 질문 등록하기 + 유효성검사
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/create")
 	public String questionCreate(
 			@Valid QuestionForm questionForm
-			,BindingResult bindingResult
+			, BindingResult bindingResult
+			, Principal principal
 			) {
 		log.info("QuestionController questionCreate().... 질문등록 및 유효성 검사");
 		// 1. 유효성 검사
@@ -82,7 +93,9 @@ public class QuestionController {
 		String subject = questionForm.getSubject();
 		String content = questionForm.getContent();
 
-		this.questionService.create(subject, content);
+		SiteUser siteUser = this.userService.getUser(principal.getName());
+		
+		this.questionService.create(subject, content,siteUser);
 		// 3. 질문 목록으로 리다이렉트
 		return "redirect:/question/list";
 	}
