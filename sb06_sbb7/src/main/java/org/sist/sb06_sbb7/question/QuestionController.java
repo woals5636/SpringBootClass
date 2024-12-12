@@ -42,7 +42,7 @@ public class QuestionController {
 		model.addAttribute("questionList", questionList);
 	}
 	 */
-
+/*
 	// [2]
 	@GetMapping("/list")
 	public void list(Model model
@@ -59,7 +59,7 @@ public class QuestionController {
 		int total = (int)paging.getTotalElements();
 		model.addAttribute("pageMaker",  new PageDTO(criteria, total));
 	}
-
+*/
 	// 질문상세	/question/detail/2
 	@GetMapping("/detail/{id}")
 	public String detail(@PathVariable("id") Integer id , Model model, AnswerForm answerForm ) {
@@ -146,6 +146,34 @@ public class QuestionController {
         this.questionService.delete(question);
         return "redirect:/question/list";
     }
+	
+	// 추천
+	@PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String questionVote(Principal principal, @PathVariable("id") Integer id) {
+        Question question = this.questionService.getQuestion(id);
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.questionService.vote(question, siteUser);
+        return String.format("redirect:/question/detail/%s", id);
+    }
+	
+	// [3] 검색기능 포함
+		@GetMapping("/list")
+		public void list(Model model
+				,@RequestParam(value = "page", defaultValue = "0") int page
+				, @RequestParam(value = "kw", defaultValue = "") String kw
+				) {
+
+			log.info("QuestionController list().... 페이징+검색 처리된 목록보기");
+
+			Page<Question> paging = this.questionService.getList(page, kw);
+			model.addAttribute("paging", paging);
+			model.addAttribute("kw", kw);
+
+			Criteria criteria = new Criteria(page+1, 10 ); 
+			int total = (int)paging.getTotalElements();
+			model.addAttribute("pageMaker",  new PageDTO(criteria, total));
+		}
 	
 	/* 
 	// [1] 질문 등록하기

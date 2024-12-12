@@ -2,6 +2,7 @@ package org.sist.sb06_sbb7.question;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import org.sist.sb06_sbb7.answer.Answer;
 import org.sist.sb06_sbb7.user.SiteUser;
@@ -13,6 +14,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -44,5 +46,10 @@ public class Question {
 	private SiteUser author;
 	
 	private LocalDateTime modifyDate;
+	
+	// 질문 - 회원 다대다 관계
+	@ManyToMany
+	private Set<SiteUser> voter;	//	좋아요는 한번밖에 되지 않으니까 SET 컬렉션 사용
+	
 	
 } // class
